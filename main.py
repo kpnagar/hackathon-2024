@@ -1,9 +1,5 @@
-import os
-
-import requests
-from fastapi import FastAPI, Request, HTTPException, BackgroundTasks, status, UploadFile, File
+from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
-import json
 from service import ask_ai
 
 app = FastAPI()
@@ -17,7 +13,6 @@ async def index():
 @app.post("/ask")
 async def ask(request: Request, text: str):
     try:
-        data = {"text": text}
         res = await ask_ai(text)
         answer = res['answer']
         print(answer)
